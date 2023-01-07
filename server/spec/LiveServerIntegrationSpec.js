@@ -65,5 +65,18 @@ describe('server', function() {
     });
   });
 
+  it('Should 500 when asked for a forbidden file', function(done) {
+    request('http://127.0.0.1:3000/forbidden', function(error, response, body) {
+      expect(response.statusCode).to.equal(500);
+      done();
+    });
+  });
 
+
+  it('Should 418 when asked for brewed coffee', function(done) {
+    request('http://127.0.0.1:3000/brewedcoffee', function(error, response, body) {
+      expect(response.statusCode).to.equal(418);
+      done();
+    });
+  });
 });

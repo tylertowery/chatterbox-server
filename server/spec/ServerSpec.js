@@ -91,4 +91,23 @@ describe('Node Server Request Listener Function', function() {
     expect(res._ended).to.equal(true);
   });
 
+  it('Should 500 when asked for a forbidden file', function() {
+    var req = new stubs.request('/forbidden', 'GET');
+    var res = new stubs.response();
+
+    handler.requestHandler(req, res);
+
+    expect(res._responseCode).to.equal(500);
+    expect(res._ended).to.equal(true);
+  });
+
+  it('Should 418 when asked for brewed coffee', function() {
+    var req = new stubs.request('/brewedcoffee', 'GET');
+    var res = new stubs.response();
+
+    handler.requestHandler(req, res);
+
+    expect(res._responseCode).to.equal(418);
+    expect(res._ended).to.equal(true);
+  });
 });
